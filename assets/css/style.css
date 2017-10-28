@@ -356,3 +356,9 @@ hr {
 #mapid, #checkboxes {
 	float: left;
 }
+
+
+input[type="checkbox"]#checkboxes:checked + span {
+      border-color: red;
+    background-color:red;
+}
