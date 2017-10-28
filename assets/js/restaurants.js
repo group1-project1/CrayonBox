@@ -30,7 +30,7 @@ function getRestaurants(lat, lon){
 		populateRestaurants(response);
 		cuisineList(restaurants);
 		generateMap(lat, lon);
-		addMapMarker(restaurants);
+		generateMarker(restaurants);
 		checkList();
 	})
 }

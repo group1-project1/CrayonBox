@@ -42,8 +42,8 @@ function checkList() {
 	}
 }
 
-//populates the markers
-function addMapMarker(restaurants) {
+//function to generate markers
+function generateMarker(restaurants){
 	for(i in restaurants){
 
 		var restaurant = restaurants[i];
@@ -84,11 +84,31 @@ function addMapMarker(restaurants) {
 		eventMap.addLayer(markers[i].mark);
 }
 
-//removes the markers from the map
-function removeMapMarker(){
+//adds the markers to the map
+function addMapMarker(event) {
 	for(i in markers){
 		for(key in markers[i].cuisine){
-			if($(this).attr("id") === key)
+			if($(event).attr("id") === key)
+				markers[i].cuisine[key] = "checked";
+				
+		}
+
+		var isChecked = false;
+		for(key in markers[i].cuisine){
+			if(markers[i].cuisine[key] === "checked")
+				isChecked = true;
+		}
+
+		if(isChecked)
+			eventMap.addLayer(markers[i].mark);
+	}
+}
+
+//removes the markers from the map
+function removeMapMarker(event){
+	for(i in markers){
+		for(key in markers[i].cuisine){
+			if($(event).attr("id") === key)
 				markers[i].cuisine[key] = "unchecked";
 				
 		}
@@ -103,4 +123,13 @@ function removeMapMarker(){
 		if(!isChecked)
 			eventMap.removeLayer(markers[i].mark);
 	}
+}
+
+//determines if a it was a checked or uncheck event
+function checkEvent(){
+	console.log(this.checked)
+	if(this.checked == false)
+		removeMapMarker(this);
+	else
+		addMapMarker(this);
 }
