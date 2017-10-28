@@ -30,7 +30,7 @@ function getRestaurants(lat, lon){
 		populateRestaurants(response);
 		cuisineList(restaurants);
 		generateMap(lat, lon);
-		markerMaker(restaurants);
+		addMapMarker(restaurants);
 		checkList();
 	})
 }
@@ -57,7 +57,7 @@ function populateRestaurants(restaurant){
 }
 
 //indexof version to search through objects in an array
-function findCusineIndex(cuisine){
+function findCuisineIndex(cuisine){
 	var colorIndex = 0;
 	var found = false;
 
@@ -80,7 +80,7 @@ function cuisineList(restaurant) {
 	for(i in restaurant){
 		//loops through the cuisines of the current restaurant
 		for(j in restaurant[i].cuisineType){
-			if(findCusineIndex(restaurant[i].cuisineType[j]) == -1){
+			if(findCuisineIndex(restaurant[i].cuisineType[j]) == -1){
 				var cuisine = {
 					cuisineType: restaurant[i].cuisineType[j],
 					cuisineColor: getRandomColor()
