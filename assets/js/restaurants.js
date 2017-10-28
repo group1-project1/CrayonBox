@@ -1,4 +1,5 @@
 var restaurants = [];
+var cuisines = [];
 
 function getRestaurants(lat, lon){
 	//zomato parameters
@@ -25,11 +26,14 @@ function getRestaurants(lat, lon){
 		data: parameters,
 		headers: {"user-key": apiKey}
 	}).done(function(response){
-		console.log(this.url)
+		//console.log(this.url)
 		populateRestaurants(response);
+		cuisineList(restaurants);
+		generateMap(lat, lon);
+		markerMaker(restaurants);
+		checkList();
 	})
 }
-
 
 function populateRestaurants(restaurant){
 	//generates an object of the restaurants info
@@ -49,5 +53,40 @@ function populateRestaurants(restaurant){
 
 		//adds to the array of restaurants
 		restaurants.push(r);
+	}
+}
+
+//indexof version to search through objects in an array
+function findCusineIndex(cuisine){
+	var colorIndex = 0;
+	var found = false;
+
+	while(!found && colorIndex < cuisines.length){
+		if(cuisines[colorIndex].cuisineType === cuisine)
+			found = true;
+		else
+			colorIndex++;
+	};
+
+	if(found)
+		return colorIndex;
+	else
+		return -1;
+}
+
+//creats an array of cuisines with colors associated
+function cuisineList(restaurant) {
+	//loops through the restaurants
+	for(i in restaurant){
+		//loops through the cuisines of the current restaurant
+		for(j in restaurant[i].cuisineType){
+			if(findCusineIndex(restaurant[i].cuisineType[j]) == -1){
+				var cuisine = {
+					cuisineType: restaurant[i].cuisineType[j],
+					cuisineColor: getRandomColor()
+				}
+				cuisines.push(cuisine);
+			}
+		}
 	}
 }
