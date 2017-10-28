@@ -27,9 +27,10 @@ function getRestaurants(lat, lon){
 	}).done(function(response){
 		console.log(this.url)
 		populateRestaurants(response);
+		generateMap(lat, lon);
+		markerMaker(restaurants);
 	})
 }
-
 
 function populateRestaurants(restaurant){
 	//generates an object of the restaurants info
