@@ -127,7 +127,15 @@ p {
 		.card img {
 			margin: 1px 0 0 0;
 			width: 99%;
+			height: 144px;
 		}
+
+		.dollar {
+			float: right !important;
+			width: 30px !important;
+			height: 30px !important;
+		}
+
 		.card-header {
 			height: 3.4em;
 			overflow-y: hidden;
