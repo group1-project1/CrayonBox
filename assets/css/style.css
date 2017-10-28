@@ -342,3 +342,17 @@ p {
 	animation-timing-function: ease-out;
 }
 
+.leaflet-popup-content p {
+	margin: 0px;
+	text-align: center;
+}
+
+hr {
+	margin: 5px;
+}
+
+#mapid {width: 500px; height: 500px};
+
+#mapid, #checkboxes {
+	float: left;
+}
