@@ -56,6 +56,7 @@ function populateRestaurants(restaurant){
 	}
 }
 
+//indexof version to search through objects in an array
 function findCusineIndex(cuisine){
 	var colorIndex = 0;
 	var found = false;
@@ -73,6 +74,7 @@ function findCusineIndex(cuisine){
 		return -1;
 }
 
+//creats an array of cusines with colors associated
 function cuisineList(restaurant) {
 	//loops through the restaurants
 	for(i in restaurant){
