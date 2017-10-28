@@ -46,7 +46,7 @@ function markerMaker(restaurants) {
 
 		var restaurant = restaurants[i];
 
-		var colorIndex = findCusineIndex(restaurant.cuisineType[0]);
+		var colorIndex = findCuisineIndex(restaurant.cuisineType[0]);
 
 		var colorIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + cuisines[colorIndex].cuisineColor + "&chf=a,s,ee00FFFF"
 

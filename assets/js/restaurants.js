@@ -74,7 +74,7 @@ function findCusineIndex(cuisine){
 		return -1;
 }
 
-//creats an array of cusines with colors associated
+//creats an array of cuisines with colors associated
 function cuisineList(restaurant) {
 	//loops through the restaurants
 	for(i in restaurant){
