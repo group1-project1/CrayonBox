@@ -8,7 +8,7 @@ $('#wheel').on('click', function(){
       var colorB = Math.floor((Math.random() * 256));
 
 		$('#search-results').append(
-			 '<div class="card" style="border: 5px outset rgba(' + colorR + ',' + colorG + ',' + colorB + ',.4)">' +
+			 '<div class="card" style="border: 6px outset rgba(' + colorR + ',' + colorG + ',' + colorB + ',.4)">' +
 		    '<img class="card-img-top mx-auto" src="assets/media/stock.png" alt="Card image cap">' +
 		    '<div class="card-header">' +
 		      '<h4 class="card-title">Learn Coding with Robots at RVC</h4>' +
@@ -22,14 +22,14 @@ $('#wheel').on('click', function(){
 		);
 	});
 })
-//set default degree (360*5)
-var degree = 1800;
-//number of clicks = 0
-var clicks = 0;
 
 //======================/
 //     Wheel Spin
 //======================/
+//set default degree (360*5)
+var degree = 1800;
+//number of clicks = 0
+var clicks = 0;
 $(document).ready(function(){
 	$('#wheel').click(function(){
 		clicks ++;
@@ -54,4 +54,39 @@ $(document).ready(function(){
 			noY = t.offset().top;
 		});
 	});
-});//DOCUMENT READY
+});//DOCUMENT 
+
+
+ function testAnim(x) {
+    $('.animationSandbox').removeClass().addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+      $(this).removeClass();
+    });
+  };
+
+  $(document).ready(function(){
+    $('.js--triggerAnimation').click(function(e){
+      e.preventDefault();
+      var anim = $('.js--animations').val();
+      testAnim(anim);
+    });
+
+    $('.js--animations').change(function(){
+      var anim = $(this).val();
+      testAnim(anim);
+    });
+  });
+
+
+
+$(document).ready(function(){
+    $(".card").click(function(){
+        $('.card').animate({height: '300px', opacity: '0.4'}, "slow");
+        $('.card').animate({width: '300px', opacity: '0.8'}, "slow");
+
+    });
+});
+
+
+
+
+
