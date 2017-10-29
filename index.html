@@ -9,6 +9,9 @@
 	<link rel="stylesheet" 
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
 		integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
 	<!-- CSS stylesheet -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<!-- Animate stylesheet -->
@@ -77,6 +80,11 @@
 	</div>
 </div>
 
+<!-- responsive div where the map will go -->
+<div id="mapid" class="col-md-8 col-sm-8 col-xs-8"></div>
+
+<!-- responsive div where the cuisine checkboxes will go -->
+<div id="checkboxes" class="col-md-4 col-sm-4 col-xs-4"></div>
 
  <!-- jQuery, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -94,6 +102,15 @@
 
 <!-- JS file:  Search Wheel -->
 <script type="text/javascript" src="assets/js/search-wheel.js"></script>
+
+<!-- Leaflet Javascript -->
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+    crossorigin=""></script>
+
+<script src="assets/js/leaflet.js"></script>
+
+<script src="assets/js/restaurants.js"></script>
 
 </body>
 </html>

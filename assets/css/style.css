@@ -340,3 +340,23 @@ p {
 	animation-timing-function: ease-out;
 }
 
+.leaflet-popup-content p {
+	margin: 0px;
+	text-align: center;
+}
+
+hr {
+	margin: 5px;
+}
+
+#mapid {width: 500px; height: 500px};
+
+#mapid, #checkboxes {
+	float: left;
+}
+
+
+input[type="checkbox"]#checkboxes:checked + span {
+      border-color: red;
+    background-color:red;
+}
