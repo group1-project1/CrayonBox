@@ -76,7 +76,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="card-deck mx-auto justify-content-center" id="search-results"></div>
+		<div class="card-columns mx-auto justify-content-center" id="search-results"></div>
 	</div>
 </div>
 
@@ -111,6 +111,13 @@
 <script src="assets/js/leaflet.js"></script>
 
 <script src="assets/js/restaurants.js"></script>
+  
+<!-- JS file: Event Search -->
+<script type="text/javascript" src="assets/js/event-search.js"></script>
+
+<script type="text/javascript">
+  $(document.body).on("click", ".cuisine-indicator", checkEvent);
+</script>
 
 </body>
 </html>
