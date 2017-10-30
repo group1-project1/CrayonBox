@@ -127,7 +127,7 @@ function removeMapMarker(event){
 
 //determines if a it was a checked or uncheck event
 function checkEvent(){
-	console.log(this.checked)
+	// console.log(this.checked)
 	if(this.checked == false)
 		removeMapMarker(this);
 	else
