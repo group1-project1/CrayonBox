@@ -51,9 +51,10 @@ function locationSearch(eventObject){
     };
 
     $.ajax(query).done(function(response){
-        console.log(response["latitude"]);
-    })
-}
+        console.log("Latitude: " + response["latitude"]);
+        console.log("Longitude: " + response["longitude"]);
+    });
+};
 
 
 
@@ -172,7 +173,6 @@ function grabEvent(id){
     };
 };
 
-
 function titleClick(ev){
     var classes = ev.currentTarget.className.split(" ");
     var eventObject = grabEvent(ev.currentTarget.id.split("-")[0]);
@@ -209,7 +209,7 @@ function descriptionClick(ev){
 
 function imageClick(ev){
     var eventObject = grabEvent(ev.currentTarget.id.split("-")[0]);
-
+    locationSearch(eventObject);
     
 }
 
