@@ -38,7 +38,7 @@ function eventSearch(){
 //retreive long and lat of event venue
 function locationSearch(eventObject){
     var TOKEN = "5HWZ7K734R7NM7GSELOG";
-    var URL = "https://www.eventbriteapi.com/v3/venues/" + eventObject["venue_id"];
+    var URL = "https://www.eventbriteapi.com/v3/venues/" + eventObject["venue_id"] + "/";
 
     var query = {
         url: URL,
@@ -51,7 +51,7 @@ function locationSearch(eventObject){
     };
 
     $.ajax(query).done(function(response){
-        console.log(response);
+        console.log(response["latitude"]);
     })
 }
 
