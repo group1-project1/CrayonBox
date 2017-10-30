@@ -72,11 +72,13 @@ function setDate(date){
 
 //trim event Title for display on event cards
 function trimTitle(text){
-	if (text.length < 40) {
-		return text;
-	} else { 
-		return text.slice(0, 100) + "...";
-   }
+	// if (text.length < 40) {
+	// 	return text;
+	// } else { 
+	// 	return text.slice(0, 100) + "...";
+ //   }
+ 	return text;
+
 };
 
 //trim event Description text for display on event cards
@@ -105,10 +107,8 @@ function dealCards(array, stop) {
             '<div id="' + array[i]["id"] + '" class="card animated fadeIn" style="border: 5px outset rgba(' + colorR + ',' + colorG + ',' + colorB + ',.4); background: rgba(' + colorR + ',' + colorG + ',' + colorB + ',.17)">' +
                 '<img class="dollar" src="' + dollarSign + '" alt="' + alt + '"/>' + 
                 '<img class="card-img-top mx-auto" src="'+ array[i]["logo_url"] +'" alt="Card image cap"/>' +
-                '<div class="card-header">' + 
-                    '<h4 class="card-title">' + trimTitle(array[i]["name"]) + '</h4>' +
-                '</div>' +
             '<div class="card-body" data-spy="scroll">' +
+            	 '<h5 class="card-title">' + trimTitle(array[i]["name"]) + '</h5>' +
                 '<p class="card-text">' + trimDescription(array[i]["desc"]) + '</p>' +
             '</div>' +
             '<div class="card-footer">' +

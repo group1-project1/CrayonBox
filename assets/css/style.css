@@ -380,6 +380,9 @@ body {
 	.card-columns {
 		column-count: 3;
 	}
+		.card img {
+			max-height: 150px;
+		}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -387,11 +390,71 @@ body {
 	.card-columns {
 		column-count: 4;
 	}
+		.card img {
+			max-height: 200px;
+		}
 }
 
+
 /*–––––––––––––––––––––––––*/
-/*      MAP                */
+/*     Modal pop-up        */
 /*–––––––––––––––––––––––––*/
+.modal {
+}
+
+	.modal-content {
+
+	}
+
+		.modal-header {
+			border: none;
+		}
+
+			.modal-title {
+
+			}
+
+			.nav-pills {
+			}
+				.nav-item {
+					margin: 0 0 0 20px;
+				}
+					.nav-item a {
+						font-size: 14pt;
+						padding: 5px 10px;
+						margin: 10px 8px 0 0;
+					}
+
+				#pills-event-tab{
+				}
+
+				#pills-restaurant-tab{
+				}
+
+				#pills-map-tab{
+				}
+
+		.modal-body {
+			height: 400px;
+			overflow-y: scroll;
+		}
+			
+			.tab-content {
+			}
+
+				#pills-event {
+				}
+
+				#pills-restaurant {
+				}
+
+				#pills-map {
+				}
+
+
+/*––––––––––––––––––––––*/
+/*        MAP           */
+/*–––––––––-––––––––––––*/
 .leaflet-popup-content p {
 	margin: 0px;
 	text-align: center;
