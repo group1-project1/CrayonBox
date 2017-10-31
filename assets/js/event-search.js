@@ -100,25 +100,6 @@ function setDate(date){
     }
 };
 
-//trim event Title for display on event cards
-function trimTitle(text){
-	// if (text.length < 40) {
-	// 	return text;
-	// } else { 
-	// 	return text.slice(0, 100) + "...";
- //   }
- 	return text;
-
-};
-
-//trim event Description text for display on event cards
-function trimDescription(text){
-    //return text.split(" ").splice(0, 40).join(" ") + "...";
-    return text;
-};
-
-
-
 //generate event cards and append them to the page
 function dealCards(array, stop) {
     if(array.length === 0){
@@ -146,8 +127,8 @@ function dealCards(array, stop) {
                 '<img class="dollar" src="' + dollarSign + '" alt="' + alt + '"/>' + 
                 '<img class="card-img-top mx-auto" src="'+ array[i]["logo_url"] +'" alt="Card image cap"/>' +
             '<div class="card-body" data-spy="scroll">' +
-            	 '<h5 class="card-title">' + trimTitle(array[i]["name"]) + '</h5>' +
-                '<p class="card-text">' + trimDescription(array[i]["desc"]) + '</p>' +
+            	 '<h5 class="card-title">' + array[i]["name"] + '</h5>' +
+                '<p class="card-text">' + array[i]["desc"] + '</p>' +
             '</div>' +
             '<div class="card-footer">' +
                 '<small class="text">' + moment(array[i]["date"]).local().format("dddd LT") + '</small> <br>' +
