@@ -2,6 +2,10 @@ var restaurants = [];
 var cuisines = [];
 
 function getRestaurants(lat, lon){
+	//clears the previous restaurants
+	restaurants = [];
+	cuisines = [];
+
 	//zomato parameters
 	var apiKey = "c188051510e27b0340260960580b380e";
 	var queryURL = "https://developers.zomato.com/api/v2.1/search";
