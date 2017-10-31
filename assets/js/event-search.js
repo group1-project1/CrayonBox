@@ -46,7 +46,6 @@ function locationSearch(eventObject){
         headers: {
             'Authorization': "Bearer " + TOKEN,
             'Content-Type':'application/x-www-form-urlencoded'
-            
         }
     };
 
@@ -112,7 +111,10 @@ function trimDescription(text){
 
 //generate event cards and append them to the page
 function dealCards(array, stop) {
-    for(var i = 0; i < stop; i++){
+    if(array.length === 0){
+        //sorry, no events match your current search parameters
+    };
+    for(var i = 0; (i < stop && i < array.length); i++){
         //create randomized RGB values for each card border
         var colorR = Math.floor((Math.random() * 256));
         var colorG = Math.floor((Math.random() * 256));
@@ -153,15 +155,12 @@ function dealCards(array, stop) {
 
     $(".card-body").on("click", function(event){
         descriptionClick(event);
-
     });
 
     $(".card-img-top").on("click", function(event){
         var eventObject = grabEvent(event.currentTarget.id.split("-")[0]);
         locationSearch(eventObject);
-    })
-
-
+    });
 };
 
 //returns the event object from eventList associated with the id parameter passed to the function
@@ -189,8 +188,7 @@ function titleClick(ev){
             target.addClass("expanded");
         };
     };
-
-}
+};
 
 function descriptionClick(ev){
     var classes = ev.currentTarget.className.split(" ");
@@ -209,16 +207,12 @@ function descriptionClick(ev){
 
 function imageClick(ev){
     var eventObject = grabEvent(ev.currentTarget.id.split("-")[0]);
-    locationSearch(eventObject);
-    
-}
+    locationSearch(eventObject);  
+};
 
 $(window).ready(function(){
     $("#wheel").on("click", function(event){
         event.preventDefault();
-
         eventSearch();  
     });
-
-
 });
