@@ -23,7 +23,7 @@ function eventSearch(){
         }
     };
 
-    //empty search results div
+    //empty search results div and event list
     $("#search-results").empty();
     eventList = [];
 
@@ -33,6 +33,35 @@ function eventSearch(){
         parseEvents(response);
         dealCards(eventList, 10)
     });
+};
+
+//retreive long and lat of event venue
+function locationSearch(eventObject){
+    var TOKEN = "5HWZ7K734R7NM7GSELOG";
+    var URL = "https://www.eventbriteapi.com/v3/venues/" + eventObject["venue_id"] + "/";
+
+    var query = {
+        url: URL,
+        method: "GET",
+        headers: {
+            'Authorization': "Bearer " + TOKEN,
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
+    };
+
+    $.ajax(query).done(function(response){
+        console.log("Lat: " + response.latitude);
+        console.log("Long: " + response.longitude);
+    })
+};
+
+//returns the event object from eventList associated with the id parameter passed to the function
+function grabEvent(id){
+    for(var i in eventList){
+        if(eventList[i]["id"] ===  id){
+            return eventList[i];
+        };
+    };
 };
 
 //stores into into eventList to be used in event cards
@@ -87,19 +116,27 @@ function trimDescription(text){
     return text;
 };
 
+
+
 //generate event cards and append them to the page
 function dealCards(array, stop) {
-    for(var i = 0; i < stop; i++){
+    if(array.length === 0){
+        //sorry, no events match your current search parameters
+    };
+    for(var i = 0; (i < stop && i < array.length); i++){
+        //create randomized RGB values for each card border
         var colorR = Math.floor((Math.random() * 256));
         var colorG = Math.floor((Math.random() * 256));
         var colorB = Math.floor((Math.random() * 256));
 
+        //set default values for price image url and alt text
         var dollarSign = "#";
         var alt = "";
 
+        //overwrite default values if event is not free
         if(!array[i]["is_free"]){
             dollarSign = "assets/media/dollar.png";
-            alt = "paid event";
+            alt = "Paid event";
         };
 
         //create event card
@@ -116,7 +153,12 @@ function dealCards(array, stop) {
                 '<small class="text">' + moment(array[i]["date"]).local().format("LL") + '</small>' +
             '</div>'
         );
-    };  
+    }; 
+
+    $(".card").on("click", function(event){
+        var eventObject = grabEvent(event.currentTarget.id);
+        locationSearch(eventObject);
+    });
 }; 
  
 
