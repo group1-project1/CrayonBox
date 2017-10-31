@@ -52,7 +52,8 @@ function locationSearch(eventObject){
     $.ajax(query).done(function(response){
         console.log("Lat: " + response.latitude);
         console.log("Long: " + response.longitude);
-    })
+        getRestaurants(response.latitude, response.longitude);
+    });
 };
 
 //returns the event object from eventList associated with the id parameter passed to the function
