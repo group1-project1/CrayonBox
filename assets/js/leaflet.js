@@ -3,6 +3,9 @@ var eventMap;
 //initialize an array of map markers
 var markers = [];
 
+//stores the svg position of the checkmarks
+var check_d = "M14.1 27.2l7.1 7.2 16.7-16.8";
+
 //function that generates a map on the screen
 function generateMap(lat, long) {
 
@@ -50,7 +53,7 @@ function checkList() {
 		//add classes to make the checkboxes mobile responsive
 		sep.addClass("row h-100");
 		//append the checkbox itself and the name associated with each checkbox
-		sep.append("<svg class='checkmark my-auto' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='#"
+		sep.append("<svg class='checkmark my-auto' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' id='"+cuisines[i].cuisineType+"' cx='26' cy='26' r='25' fill='#"
 		 			+ cuisines[i].cuisineColor + "'/><path class='checkmark__check' fill='white' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg> " 
 		 			+ "<h7 class = 'cuisine_name'>" + cuisines[i].cuisineType + "</h7>");
 		$("#checkboxes").append(sep);
@@ -142,9 +145,13 @@ function removeMapMarker(event){
 
 //determines if it was a checked or uncheck event
 function checkEvent(){
-	console.log(this.checked)
-	if(this.checked == false)
-		removeMapMarker(this);
-	else
+	if($(this).parent().children(".checkmark__check").attr("d") == ""){
 		addMapMarker(this);
+		$(this).parent().children(".checkmark__check").attr("d", check_d);
+	}
+	else{
+		removeMapMarker(this);
+		$(this).parent().children(".checkmark__check").attr("d", "");
+	}
+		
 }
