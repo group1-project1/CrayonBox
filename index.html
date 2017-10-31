@@ -5,86 +5,168 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Group 1 Project 1 - Crayon Box</title>
+
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" 
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" 
-		integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-   crossorigin=""/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+	<!-- Animation -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+	<!-- Google Font --> 
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,700,900" rel="stylesheet">
+
 	<!-- CSS stylesheet -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- Leaflet -->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+
 </head>
+
 <body>
-	
-<div class="jumbotron jumbotron-fluid">
-  <div class="container text-center">
-  	 <!-- page heading -->
-    <h1 class="display-3">Crayon Box</h1>
-    <p class="lead">The only way to find an event and everything you'll need to know about it.</p>
-    <form class="form-group row justify-content-center">
-    	<!-- search type -->
-      <div class="input-group col-lg-4 col-md-4 col-8">
-        <div class="input-group-addon">Find</div>
-        <input type="text" class="form-control" placeholder="event type" id="search-type">
-      </div>
-    	<!-- search location -->
-      <div class="input-group col-lg-4 col-md-4 col-8">
-        <div class="input-group-addon">Near</div>
-        <input type="text" class="form-control" placeholder="city or zip code" id="search-location">
-      </div>
-
-      <!-- date dropdown -->
-      <div class="input-group col-lg-3 col-md-4  col-8">
-        <div class="input-group-addon">Date</div>
-        <select class="form-control" id="search-date">
-          <option>All Dates</option>
-          <option>Today</option>
-          <option>Tomorrow</option>
-          <option>This Week</option>
-          <option>This Weekend</option>
-          <option>Next Week</option>
-          <option>Next Month</option>
-        </select>
-      </div>
-
-    </form>
-
-    <!-- Search Wheel -->
-    <div class="form-group row justify-content-center" id="button-area">
-      <div id="wheel">
-		   <div id="inner-wheel">
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-				<div class="sec"><span></span></div>
-		   </div>
-		   <div id="center">
-		       <div id="inner-center"></div>
-		   </div>
-		</div>
-    </div>
-
-  </div>
-</div>
 
 <div class="container-fluid">
-	<div class="row">
-		<div class="card-columns mx-auto justify-content-center" id="search-results"></div>
+
+	<!-- Jumbotron, inputs, and wheel -->     
+	<!-- delete "animated fadeInUpBig" from .display-3 for dev -->
+	<div class="jumbotron jumbotron-fluid animated fadeInDownBig"> 
+	  <div class="container text-center">
+	  	 <!-- page heading -->
+	    <h1 class="display-3" data-toggle="modal" data-target="#event-info">
+	    	<span id="bold">Crayon</span>
+	    	<span id="thin">BOX</span>
+	    </h1>
+	    <p class="lead">The easiest way to find an event and everything about it.</p>
+	    <form class="form-group row justify-content-center">
+	    	<!-- search type -->
+	      <div class="input-group col-lg-4 col-md-4 col-10">
+	        <div class="input-group-addon">Find</div>
+	        <input type="text" class="form-control" placeholder="event type" id="search-type">
+	      </div>
+	    	<!-- search location -->
+	      <div class="input-group col-lg-4 col-md-4 col-10">
+	        <div class="input-group-addon">Near</div>
+	        <input type="text" class="form-control" placeholder="city or zip code" id="search-location">
+	      </div>
+	      <!-- date dropdown -->
+	      <div class="input-group col-lg-3 col-md-4  col-10">
+	        <div class="input-group-addon">Date</div>
+	        <select class="form-control" id="search-date">
+	          <option>All Dates</option>
+	          <option>Today</option>
+	          <option>Tomorrow</option>
+	          <option>This Week</option>
+	          <option>This Weekend</option>
+	          <option>Next Week</option>
+	          <option>Next Month</option>
+	        </select>
+	      </div>
+	    </form>
+
+	    <!-- Search Wheel -->
+	    <div class="form-group row justify-content-center" id="button-area">
+	      <div id="wheel">
+			   <div id="inner-wheel">
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+					<div class="sec"><span></span></div>
+			   </div>
+			   <div id="center">
+			       <div id="inner-center"></div>
+			   </div>
+			</div>
+	    </div>
+
+	  </div>
 	</div>
-</div>
 
-<!-- responsive div where the map will go -->
-<div id="mapid" class="col-md-8 col-sm-8 col-xs-8"></div>
+	<!-- Search Results -->
+	<div class="row">
+		<div class="card-columns mx-auto" id="search-results"></div>
+	</div>
 
-<!-- responsive div where the cuisine checkboxes will go -->
-<div id="checkboxes" class="col-md-4 col-sm-4 col-xs-4"></div>
+</div> <!-- page container --> 
+
+
+<!-- Modal -->
+<div class="modal fade" id="event-info" tabindex="-1" role="dialog" aria-labelledby="Additional Information" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="nav-title">[EVENT TITLE]</h5> -->
+			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+			  <li class="nav-item">
+			    <a class="nav-link active" id="pills-event-tab" data-toggle="pill" href="#pills-event" role="tab" aria-controls="pills-event" aria-selected="true">Event</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="pills-restaurant-tab" data-toggle="pill" href="#pills-restaurant" role="tab" aria-controls="pills-restaurant" aria-selected="false">Restaurant</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="false">Map</a>
+			  </li>
+			</ul>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times; close</span>
+        </button>
+      </div>
+
+		<div class="modal-body">
+		  <div class="container-fluid">
+
+			<div class="tab-content" id="pills-tabContent">
+			  <div class="tab-pane fade show active" id="pills-event" role="tabpanel" aria-labelledby="pills-event-tab">
+			  	 <span class="event-title" ">Title...</span>
+			  	 <br>
+			  	 <span id="event-by">By...</span>
+			  	 <br>
+			  	 <span id="event-cost">Cost...</span>
+			  	 <br>
+			  	 <span id="event-time">Date and time...</span>
+			  	 <br>
+			  	 <span id="event-location">Location...</span>
+			  	 <br>
+			  	 <span id="event-description">Description...</span>
+			  </div>
+			  <div class="tab-pane fade" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
+			  	 <span class="event-title" ">Title...</span>
+			  	 <br>
+			  	 <span id="restaurant-selector">Restauraunt Selector...</span>
+			   	<br>
+				 <span id="restaurant-list">Restauraunt list...</span>
+			  </div>
+			  <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+			  	 <span class="event-title" ">Title...</span>
+			  	 <br>
+			  	 <span class="event-map" ">Map...</span>
+			  	 <br>
+			  </div>
+			</div>
+
+		  </div> <!-- container-fluid -->
+		</div> <!-- modal-body -->
+
+    </div> <!-- modal-content -->
+  </div> <!-- modal-diaog -->
+</div> <!-- modal -->
+
+
+	<!-- Map Div -->
+	<!-- <div id="mapid" class="col-lg-3 col-md-8 col-sm-8 col-xs-8"></div> -->
+	<!-- Cuisine Div -->
+	<!-- <div id="checkboxes" class="col-md-4 col-sm-4 col-xs-4"></div> -->
+
+
+  <!-- responsive div where the cuisine checkboxes will go -->
+  <!-- <div id="checkboxes" class="col"></div> -->
 
  <!-- jQuery, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -97,7 +179,7 @@
 <!-- Moment.JS -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.19.1/moment.js"></script>
 
-<!-- jQuery-ui.JS for calendar pop-up, if used -->
+<!-- jQuery-ui.JS for calendar pop-up (if used) -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
 <!-- JS file:  Search Wheel -->
@@ -108,15 +190,17 @@
     integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
     crossorigin=""></script>
 
-<script src="assets/js/leaflet.js"></script>
-
-<script src="assets/js/restaurants.js"></script>
-  
 <!-- JS file: Event Search -->
 <script type="text/javascript" src="assets/js/event-search.js"></script>
-
+<!-- JS file: Weather Search -->
+<script type="text/javascript" src="assets/js/weather.js"></script>
+<!-- JS file: Restaurant Search -->
+<script type="text/javascript" src="assets/js/restaurants.js"></script>
+<!-- JS file: Leaflet Map -->
+<script type="text/javascript" src="assets/js/leaflet.js"></script>
+<!-- JS file: Cuisine Search -->
 <script type="text/javascript">
-  $(document.body).on("click", ".cuisine-indicator", checkEvent);
+	$(document.body).on("click", ".cuisine-indicator", checkEvent);
 </script>
 
 </body>
