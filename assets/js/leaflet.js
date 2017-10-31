@@ -83,7 +83,7 @@ function generateMarker(restaurants){
 
 		//creates a marker with a binded popup
 		var marker = L.marker([restaurant.latitude, restaurant.longitude], {icon: newIcon})
-						.bindPopup("<a href='" + restaurant.zomatoURL +
+						.bindPopup("<a class ='text-center' href='" + restaurant.zomatoURL +
 									"' target='_blank'>" +
 									restaurant.name +
 									"</a><hr><p>" +
