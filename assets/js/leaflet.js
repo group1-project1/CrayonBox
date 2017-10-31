@@ -20,13 +20,13 @@ function generateMap(lat, long) {
 		eventMap = L.map('mapid');
 
 	//changes the map to be at the lat and long passed in
-	eventMap.setView([lat, long], 14);
+	eventMap.setView([lat, long], 14.5);
 
 	//overlays the Leaflet map with Mapbox Streetview
 	var tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-		maxZoom: 18,
-		minZoom: 10,
+		maxZoom: 16,
+		minZoom: 12,
 		id: 'mapbox.streets',
 		accessToken: 'pk.eyJ1Ijoia29pcG9uZHRlYXJkcm9wIiwiYSI6ImNqOTR1c2x5YzFnNjYyd3FiNmhnaXVsN3AifQ.Ja_5lBjdw-888qiaCIaUXw'
 		});
