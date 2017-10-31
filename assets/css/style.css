@@ -489,7 +489,7 @@ $curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);
 .checkmark__circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
-  stroke-width: 10;
+  stroke-width: 15;
   stroke-miterlimit: 10;
   stroke: $color--green;
   fill: none;
@@ -497,11 +497,11 @@ $curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);
 }
 
 .checkmark {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: block;
-  stroke-width: 2;
+  stroke-width: 10;
   stroke: #fff;
   stroke-miterlimit: 10;
   margin: 3% 1% 0% 0%;

@@ -3,28 +3,35 @@ var eventMap;
 //initialize an array of map markers
 var markers = [];
 
+//stores the svg position of the checkmarks
+var check_d = "M14.1 27.2l7.1 7.2 16.7-16.8";
+
 //function that generates a map on the screen
 function generateMap(lat, long) {
+	//clears the previous markers of restaurants
+	markers = [];
 
 	//prepares the Leaflet map at the longitude and latitude
-	eventMap = L.map('mapid').setView([lat, long], 14);
+	if(eventMap != null)
+		eventMap.eachLayer(function (layer){
+		    eventMap.removeLayer(layer);
+		});
+	else
+		eventMap = L.map('mapid');
+
+	//changes the map to be at the lat and long passed in
+	eventMap.setView([lat, long], 14);
 
 	//overlays the Leaflet map with Mapbox Streetview
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	var tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		maxZoom: 18,
 		minZoom: 10,
 		id: 'mapbox.streets',
 		accessToken: 'pk.eyJ1Ijoia29pcG9uZHRlYXJkcm9wIiwiYSI6ImNqOTR1c2x5YzFnNjYyd3FiNmhnaXVsN3AifQ.Ja_5lBjdw-888qiaCIaUXw'
-		}).addTo(eventMap);
+		});
 
-	//displays the radius on the map with a circle
-	var circle = L.circle([lat, long], {
-		color: 'green',
-		fillColor: '#f03',
-		fillOpacity: 0.1,
-		radius: 3200
-	}).addTo(eventMap);
+	eventMap.addLayer(tileLayer);
 }
 
 //function to grab a random hex format color
@@ -50,7 +57,7 @@ function checkList() {
 		//add classes to make the checkboxes mobile responsive
 		sep.addClass("row h-100");
 		//append the checkbox itself and the name associated with each checkbox
-		sep.append("<svg class='checkmark my-auto' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='#"
+		sep.append("<svg class='checkmark my-auto' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' id='"+cuisines[i].cuisineType+"' cx='26' cy='26' r='25' fill='#"
 		 			+ cuisines[i].cuisineColor + "'/><path class='checkmark__check' fill='white' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg> " 
 		 			+ "<h7 class = 'cuisine_name'>" + cuisines[i].cuisineType + "</h7>");
 		$("#checkboxes").append(sep);
@@ -142,9 +149,13 @@ function removeMapMarker(event){
 
 //determines if it was a checked or uncheck event
 function checkEvent(){
-	// console.log(this.checked)
-	if(this.checked == false)
-		removeMapMarker(this);
-	else
+	if($(this).parent().children(".checkmark__check").attr("d") == ""){
 		addMapMarker(this);
+		$(this).parent().children(".checkmark__check").attr("d", check_d);
+	}
+	else{
+		removeMapMarker(this);
+		$(this).parent().children(".checkmark__check").attr("d", "");
+	}
+		
 }
