@@ -283,10 +283,12 @@ body {
 		transition: .5s;
 		margin: 0 0 60px 0 !important;
 		width: 90% !important;
+		-webkit-backface-visibility: hidden;
 	}
 		.card:hover {
 			transform: scale(1.05);
 			transition: .5s;
+			-webkit-backface-visibility: hidden;
 		}
 		.dollar {
 			position: absolute;
