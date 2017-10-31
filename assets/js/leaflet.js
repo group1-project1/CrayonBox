@@ -1,9 +1,15 @@
+//set global map variable
 var eventMap;
+//initialize an array of map markers
 var markers = [];
 
+//function that generates a map on the screen
 function generateMap(lat, long) {
+
+	//prepares the Leaflet map at the longitude and latitude
 	eventMap = L.map('mapid').setView([lat, long], 14);
 
+	//overlays the Leaflet map with Mapbox Streetview
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		maxZoom: 18,
@@ -12,32 +18,41 @@ function generateMap(lat, long) {
 		accessToken: 'pk.eyJ1Ijoia29pcG9uZHRlYXJkcm9wIiwiYSI6ImNqOTR1c2x5YzFnNjYyd3FiNmhnaXVsN3AifQ.Ja_5lBjdw-888qiaCIaUXw'
 		}).addTo(eventMap);
 
+	//displays the radius on the map with a circle
 	var circle = L.circle([lat, long], {
 		color: 'green',
 		fillColor: '#f03',
-		fillOpacity: 0.2,
+		fillOpacity: 0.1,
 		radius: 3200
 	}).addTo(eventMap);
 }
 
+//function to grab a random hex format color
 function getRandomColor() {
 	var letters = '0123456789ABCDEF';
 	var color = "";
 	for (var i = 0; i < 6; i++) {
-		color = letters[Math.floor(Math.random() * 16)];
+		color += letters[Math.floor(Math.random() * 16)];
 	}
 	return color;
 }
 
+//function to generate a checklist of cuisine types next to or below the map
 function checkList() {
+	//overwrites the display to be blank
 	$("#checkboxes").html("");
+	//for the number of unique cuisines in the restaurant list
 	for(var i = 0; i<cuisines.length; i++) {
+		//create a div assigned to a variable
 		var sep = $("<div>");
+		//add class associated with each checkbox
 		sep.addClass("checkbox-display");
-		sep.addClass("col-md-12 col-sm-12 col-xs-12");
-		sep.append("<input type='checkbox' name='cuisine' class='cuisine-indicator' checked='checked' id='"+cuisines[i].cuisineType+"'>" + " " + cuisines[i].cuisineType);
-		var color_checker = "#" + cuisines[i].cuisineColor;
-		sep.css("color", color_checker);
+		//add classes to make the checkboxes mobile responsive
+		sep.addClass("row h-100");
+		//append the checkbox itself and the name associated with each checkbox
+		sep.append("<svg class='checkmark my-auto' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' cx='26' cy='26' r='25' fill='#"
+		 			+ cuisines[i].cuisineColor + "'/><path class='checkmark__check' fill='white' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg> " 
+		 			+ "<h7 class = 'cuisine_name'>" + cuisines[i].cuisineType + "</h7>");
 		$("#checkboxes").append(sep);
 	}
 }
@@ -125,7 +140,7 @@ function removeMapMarker(event){
 	}
 }
 
-//determines if a it was a checked or uncheck event
+//determines if it was a checked or uncheck event
 function checkEvent(){
 	// console.log(this.checked)
 	if(this.checked == false)
