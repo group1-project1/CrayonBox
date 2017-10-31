@@ -35,6 +35,35 @@ function eventSearch(){
     });
 };
 
+//retreive long and lat of event venue
+function locationSearch(eventObject){
+    var TOKEN = "5HWZ7K734R7NM7GSELOG";
+    var URL = "https://www.eventbriteapi.com/v3/venues/" + eventObject["venue_id"] + "/";
+
+    var query = {
+        url: URL,
+        method: "GET",
+        headers: {
+            'Authorization': "Bearer " + TOKEN,
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
+    };
+
+    $.ajax(query).done(function(response){
+        console.log("Lat: " + response.latitude);
+        console.log("Long: " + response.longitude);
+    })
+};
+
+//returns the event object from eventList associated with the id parameter passed to the function
+function grabEvent(id){
+    for(var i in eventList){
+        if(eventList[i]["id"] ===  id){
+            return eventList[i];
+        };
+    };
+};
+
 //stores into into eventList to be used in event cards
 function parseEvents(events){ 
     for(var i in events["events"]){
@@ -124,7 +153,12 @@ function dealCards(array, stop) {
                 '<small class="text">' + moment(array[i]["date"]).local().format("LL") + '</small>' +
             '</div>'
         );
-    };  
+    }; 
+
+    $(".card").on("click", function(event){
+        var eventObject = grabEvent(event.currentTarget.id);
+        locationSearch(eventObject);
+    });
 }; 
  
 
