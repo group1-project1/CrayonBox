@@ -8,26 +8,30 @@ var check_d = "M14.1 27.2l7.1 7.2 16.7-16.8";
 
 //function that generates a map on the screen
 function generateMap(lat, long) {
+	//clears the previous markers of restaurants
+	markers = [];
 
 	//prepares the Leaflet map at the longitude and latitude
-	eventMap = L.map('mapid').setView([lat, long], 14);
+	if(eventMap != null)
+		eventMap.eachLayer(function (layer){
+		    eventMap.removeLayer(layer);
+		});
+	else
+		eventMap = L.map('mapid');
+
+	//changes the map to be at the lat and long passed in
+	eventMap.setView([lat, long], 14);
 
 	//overlays the Leaflet map with Mapbox Streetview
-	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	var tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		maxZoom: 18,
 		minZoom: 10,
 		id: 'mapbox.streets',
 		accessToken: 'pk.eyJ1Ijoia29pcG9uZHRlYXJkcm9wIiwiYSI6ImNqOTR1c2x5YzFnNjYyd3FiNmhnaXVsN3AifQ.Ja_5lBjdw-888qiaCIaUXw'
-		}).addTo(eventMap);
+		});
 
-	//displays the radius on the map with a circle
-	var circle = L.circle([lat, long], {
-		color: 'green',
-		fillColor: '#f03',
-		fillOpacity: 0.1,
-		radius: 3200
-	}).addTo(eventMap);
+	eventMap.addLayer(tileLayer);
 }
 
 //function to grab a random hex format color
