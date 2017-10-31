@@ -15,7 +15,7 @@ function weatherCall(lat, lon) {
 	}).done(function(response) {
 		console.log(this.url);
 		console.log(response);
-		weatherIconUrl: response.current.condition.icon.substring(2);
+		weatherIconUrl = response.current.condition.icon.substring(2);
 	}).fail(function(response){
 		console.log(this.url);
 	});

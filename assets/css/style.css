@@ -1,6 +1,6 @@
 body {
 	background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-	min-width: 374px;
+	min-width: 250px;
 	min-height: 1300px;
 	user-select: none;
 }
