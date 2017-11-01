@@ -1,3 +1,6 @@
+var CARDS_PER_PAGE = 12;
+var page = 0;
+
 var eventList = [];
 
 
@@ -24,8 +27,9 @@ function eventSearch(){
     };
 
     //empty search results div and event list
-    $("#search-results").empty();
+    
     eventList = [];
+    page = 0;
 
     //make ajax api call
     $.ajax(query).done(function(response){
@@ -100,31 +104,15 @@ function setDate(date){
     }
 };
 
-//trim event Title for display on event cards
-function trimTitle(text){
-	// if (text.length < 40) {
-	// 	return text;
-	// } else { 
-	// 	return text.slice(0, 100) + "...";
- //   }
- 	return text;
-
-};
-
-//trim event Description text for display on event cards
-function trimDescription(text){
-    //return text.split(" ").splice(0, 40).join(" ") + "...";
-    return text;
-};
-
-
-
 //generate event cards and append them to the page
-function dealCards(array, stop) {
+function dealCards(array) {
+    //empty search results div
+    $("#search-results").empty();
+
     if(array.length === 0){
         //sorry, no events match your current search parameters
     };
-    for(var i = 0; (i < stop && i < array.length); i++){
+    for(var i = (page * CARDS_PER_PAGE); (i < (CARDS_PER_PAGE * (page + 1)) && i < array.length); i++){
         //create randomized RGB values for each card border
         var colorR = Math.floor((Math.random() * 256));
         var colorG = Math.floor((Math.random() * 256));
@@ -146,8 +134,8 @@ function dealCards(array, stop) {
                 '<img class="dollar" src="' + dollarSign + '" alt="' + alt + '"/>' + 
                 '<img class="card-img-top mx-auto" src="'+ array[i]["logo_url"] +'" alt="Card image cap"/>' +
             '<div class="card-body" data-spy="scroll">' +
-            	 '<h5 class="card-title">' + trimTitle(array[i]["name"]) + '</h5>' +
-                '<p class="card-text">' + trimDescription(array[i]["desc"]) + '</p>' +
+            	 '<h5 class="card-title">' + array[i]["name"] + '</h5>' +
+                '<p class="card-text">' + array[i]["desc"] + '</p>' +
             '</div>' +
             '<div class="card-footer">' +
                 '<small class="text">' + moment(array[i]["date"]).local().format("dddd LT") + '</small> <br>' +
@@ -161,6 +149,22 @@ function dealCards(array, stop) {
         locationSearch(eventObject);
     });
 }; 
+
+//page through results
+function turnPage(direction){
+    if(direction === "forward"){
+        if(page < (Math.floor((eventList.length / CARDS_PER_PAGE) - 1))){
+            page++;
+            dealCards(eventList);
+        };
+    }
+    else if(direction === "back"){
+        if(page > 0){
+            page--;
+            dealCards(eventList);
+        };
+    };
+};
  
 
 $(window).ready(function(){
@@ -174,5 +178,13 @@ $(window).ready(function(){
 		  $('.display-3').addClass('animated bounce').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		  	$(this).removeClass('animated bounce');
 		  });
+    });
+
+    $("#next-btn").on("click", function(){
+        turnPage("forward");
+    });
+
+    $("#back-btn").on("click", function(){
+        turnPage("back");
     });
 });

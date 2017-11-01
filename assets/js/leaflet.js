@@ -21,6 +21,7 @@ function generateMap(lat, long) {
 
 	//changes the map to be at the lat and long passed in
 	eventMap.setView([lat, long], 14.5);
+	generateEventMarker(lat, long);
 
 	//overlays the Leaflet map with Mapbox Streetview
 	var tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -64,6 +65,23 @@ function checkList() {
 	}
 }
 
+function generateEventMarker(lat, long){
+
+	var redIcon = new L.Icon({
+	  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+	  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+	  iconSize: [25, 41],
+	  iconAnchor: [12, 41],
+	  popupAnchor: [1, -34],
+	  shadowSize: [41, 41]
+	});
+
+	L.marker([lat, long], {icon: redIcon}).addTo(eventMap).bindPopup("<p> EVENT </p>");
+
+
+
+}
+
 //function to generate markers
 function generateMarker(restaurants){
 	for(i in restaurants){
@@ -78,7 +96,7 @@ function generateMarker(restaurants){
 			iconUrl: colorIcon,
 			iconSize: [15, 35],
 			iconAnchor: [22, 25],
-			popupAnchor: [-3, -76]
+			popupAnchor: [-15, -18]
 		});
 
 		//creates a marker with a binded popup
