@@ -1,3 +1,6 @@
+var CARDS_PER_PAGE = 12;
+var page = 0;
+
 var eventList = [];
 
 
@@ -24,8 +27,9 @@ function eventSearch(){
     };
 
     //empty search results div and event list
-    $("#search-results").empty();
+    
     eventList = [];
+    page = 0;
 
     //make ajax api call
     $.ajax(query).done(function(response){
@@ -101,11 +105,14 @@ function setDate(date){
 };
 
 //generate event cards and append them to the page
-function dealCards(array, stop) {
+function dealCards(array) {
+    //empty search results div
+    $("#search-results").empty();
+
     if(array.length === 0){
         //sorry, no events match your current search parameters
     };
-    for(var i = 0; (i < stop && i < array.length); i++){
+    for(var i = (page * CARDS_PER_PAGE); (i < (CARDS_PER_PAGE * (page + 1)) && i < array.length); i++){
         //create randomized RGB values for each card border
         var colorR = Math.floor((Math.random() * 256));
         var colorG = Math.floor((Math.random() * 256));
@@ -142,6 +149,22 @@ function dealCards(array, stop) {
         locationSearch(eventObject);
     });
 }; 
+
+//page through results
+function turnPage(direction){
+    if(direction === "forward"){
+        if(page < (Math.floor((eventList.length / CARDS_PER_PAGE) - 1))){
+            page++;
+            dealCards(eventList);
+        };
+    }
+    else if(direction === "back"){
+        if(page > 0){
+            page--;
+            dealCards(eventList);
+        }
+    }
+}
  
 
 $(window).ready(function(){
@@ -155,5 +178,13 @@ $(window).ready(function(){
 		  $('.display-3').addClass('animated bounce').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		  	$(this).removeClass('animated bounce');
 		  });
+    });
+
+    $("#next-btn").on("click", function(){
+        turnPage("forward");
+    });
+
+    $("back-btn").on("click", function(){
+        turnPage("back");
     });
 });
