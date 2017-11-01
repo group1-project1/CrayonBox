@@ -162,9 +162,9 @@ function turnPage(direction){
         if(page > 0){
             page--;
             dealCards(eventList);
-        }
-    }
-}
+        };
+    };
+};
  
 
 $(window).ready(function(){
@@ -184,7 +184,7 @@ $(window).ready(function(){
         turnPage("forward");
     });
 
-    $("back-btn").on("click", function(){
+    $("#back-btn").on("click", function(){
         turnPage("back");
     });
 });
