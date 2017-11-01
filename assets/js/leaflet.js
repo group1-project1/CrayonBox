@@ -56,10 +56,7 @@ function checkList() {
 		//add class associated with each checkbox
 		sep.addClass("checkbox-display");
 		//add border color to each checkbox
-		sep.css({"border-color": cuisines[i].cuisineColor,
-					"border-weight": "1px",
-					"border-style":"solid"
-			});
+		sep.css("border-color", cuisines[i].cuisineColor);
 		//add classes to make the checkboxes mobile responsive
 		sep.addClass("row h-100");
 		//append the checkbox itself and the name associated with each checkbox
