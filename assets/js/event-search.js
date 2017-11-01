@@ -56,6 +56,11 @@ function locationSearch(eventObject){
     $.ajax(query).done(function(response){
         console.log("Lat: " + response.latitude);
         console.log("Long: " + response.longitude);
+
+        //call weather API
+        getWeather(response.latitude, response.longitude, eventObject.date);
+
+        //call restaurant API
         getRestaurants(response.latitude, response.longitude);
     });
 };
@@ -90,7 +95,7 @@ function parseEvents(events){
 function setLogoUrl(logo){
     if(logo === null){
         return "assets/media/stock.png";
-    } else{
+    } else {
         return logo["url"];
     }
 };
@@ -112,6 +117,7 @@ function dealCards(array) {
     if(array.length === 0){
         //sorry, no events match your current search parameters
     };
+    
     for(var i = (page * CARDS_PER_PAGE); (i < (CARDS_PER_PAGE * (page + 1)) && i < array.length); i++){
         //create randomized RGB values for each card border
         var colorR = Math.floor((Math.random() * 256));
@@ -130,7 +136,7 @@ function dealCards(array) {
 
         //create event card
         $('#search-results').append(
-            '<div id="' + array[i]["id"] + '" class="card animated fadeIn" style="border: 5px outset rgba(' + colorR + ',' + colorG + ',' + colorB + ',.4); background: rgba(' + colorR + ',' + colorG + ',' + colorB + ',.17)">' +
+            '<div id="' + array[i]["id"] + '" class="card animated fadeIn" data-toggle="modal" data-target="#event-info" style="border: 5px outset rgba(' + colorR + ',' + colorG + ',' + colorB + ',.4); background: rgba(' + colorR + ',' + colorG + ',' + colorB + ',.17)">' +
                 '<img class="dollar" src="' + dollarSign + '" alt="' + alt + '"/>' + 
                 '<img class="card-img-top mx-auto" src="'+ array[i]["logo_url"] +'" alt="Card image cap"/>' +
             '<div class="card-body" data-spy="scroll">' +
@@ -144,9 +150,17 @@ function dealCards(array) {
         );
     }; 
 
+    //display back-next buttons
+    $('.btn-group').css('visibility','visible');
+
     $(".card").on("click", function(event){
+    	  //console.log(event);
+
         var eventObject = grabEvent(event.currentTarget.id);
         locationSearch(eventObject);
+
+        $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
+        $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
     });
 }; 
 
@@ -157,8 +171,7 @@ function turnPage(direction){
             page++;
             dealCards(eventList);
         };
-    }
-    else if(direction === "back"){
+    } else if (direction === "back"){
         if(page > 0){
             page--;
             dealCards(eventList);
@@ -171,7 +184,7 @@ $(window).ready(function(){
     $("#wheel").on("click", function(event){
         event.preventDefault();
 
-        // API call
+        // API call to search & display events
         eventSearch(); 
 			
 			// animates Jumbotron on wheel click
