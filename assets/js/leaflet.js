@@ -54,7 +54,7 @@ function checkList() {
 		//create a div assigned to a variable
 		var sep = $("<div>");
 		//add class associated with each checkbox
-		sep.addClass("checkbox-display")
+		sep.addClass("checkbox-display");
 		//add border color to each checkbox
 		sep.css({"border-color": cuisines[i].cuisineColor,
 					"border-weight": "1px",
