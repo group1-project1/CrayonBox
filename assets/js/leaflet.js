@@ -51,6 +51,8 @@ function checkList() {
 	$("#checkboxes").html("");
 	//for the number of unique cuisines in the restaurant list
 	for(var i = 0; i<cuisines.length; i++) {
+		var mainDiv = $("<div>");
+		mainDiv.addClass("col-auto float-left checkbox");
 		//create a div assigned to a variable
 		var sep = $("<div>");
 		//add class associated with each checkbox
@@ -60,10 +62,11 @@ function checkList() {
 		//add classes to make the checkboxes mobile responsive
 		sep.addClass("row h-100");
 		//append the checkbox itself and the name associated with each checkbox
-		sep.append("<svg class='checkmark my-auto' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' id='"+cuisines[i].cuisineType+"' cx='26' cy='26' r='25' fill='#"
+		sep.append("<div class='my-auto'><svg class='checkmark float-left' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle class='checkmark__circle' id='"+cuisines[i].cuisineType+"' cx='26' cy='26' r='25' fill='#"
 		 			+ cuisines[i].cuisineColor + "'/><path class='checkmark__check' fill='white' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg> " 
-		 			+ "<h7 class = 'cuisine_name'>" + cuisines[i].cuisineType + "</h7>");
-		$("#checkboxes").append(sep);
+		 			+ "<h7 class='cuisine-name float-left'>" + cuisines[i].cuisineType + "</h7></div>");
+		mainDiv.append(sep);
+		$("#checkboxes").append(mainDiv);
 	}
 }
 
@@ -152,14 +155,12 @@ function removeMapMarker(event){
 		for(key in markers[i].cuisine){
 			if($(event).attr("id") === key)
 				markers[i].cuisine[key] = "unchecked";
-				
 		}
 
 		var isChecked = false;
 		for(key in markers[i].cuisine){
 			if(markers[i].cuisine[key] === "checked")
 				isChecked = true;
-				
 		}
 
 		if(!isChecked)
@@ -169,13 +170,12 @@ function removeMapMarker(event){
 
 //determines if it was a checked or uncheck event
 function checkEvent(){
-	if($(this).parent().children(".checkmark__check").attr("d") == ""){
-		addMapMarker(this);
-		$(this).parent().children(".checkmark__check").attr("d", check_d);
+	if($(this).children().children().children(".checkmark__check").attr("d") == ""){
+		addMapMarker($(this).children().children().children(".checkmark__circle"));
+		$(this).children().children().children(".checkmark__check").attr("d", check_d);
 	}
 	else{
-		removeMapMarker(this);
-		$(this).parent().children(".checkmark__check").attr("d", "");
-	}
-		
+		removeMapMarker($(this).children().children().children(".checkmark__circle"));
+		$(this).children().children().children(".checkmark__check").attr("d", "");
+	}	
 }
