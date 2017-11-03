@@ -3,6 +3,7 @@ body {
 	min-width: 250px;
 	min-height: 1300px;
 	user-select: none;
+	margin: 0 0 100px 0;
 }
 
 /*–––––––––––––––––––––––––*/
@@ -346,12 +347,19 @@ body {
 			left: 10%;
 			right: 10%;
 		}
+			.card:hover {
+				transform: none;
+				transition: none;
+				-webkit-backface-visibility: hidden;
+			}
+
 		.card img {
 			max-height: 226px;
 		}
-			.card-footer small {
-				font-size: 13pt;
-			}
+
+		.card-footer small {
+			font-size: 13pt;
+		}
 }
 
 /*Small devices (landscape phones, 576px and up)*/
@@ -405,7 +413,7 @@ body {
 }
 
 	.modal-content {
-
+		padding: 0 0 40px 0;
 	}
 
 		.modal-header {
@@ -424,7 +432,7 @@ body {
 					.nav-item a {
 						font-size: 14pt;
 						padding: 5px 10px;
-						margin: 10px 8px 0 0;
+						margin: 10px 0 0 0;
 					}
 
 				#pills-event-tab{
@@ -437,7 +445,7 @@ body {
 				}
 
 		.modal-body {
-			height: 400px;
+			height: 380px;
 			overflow-y: scroll;
 		}
 			
@@ -453,7 +461,52 @@ body {
 				#pills-map {
 				}
 
+				#event-title {
+				}
 
+				#event-location{
+				}
+
+				#event-weather {
+					position: absolute;
+					z-index: 999;
+					top: 30px;
+					right: 30px;
+				}
+
+				#event-description {
+				}
+
+/*––––––––––––––––––––––*/
+/*      Page Buttons    */
+/*–––––––––-––––––––––––*/
+.btn-group {
+	width: 100%;
+	visibility: hidden;
+}
+
+#back-btn, #next-btn {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 25px;
+	margin: 0 20px;
+	padding: 8px 20px;
+	border-radius: 50%;
+	background-color: #bababa;
+	color: black;
+}
+
+	#back-btn:hover, #next-btn:hover {
+		color: black;
+	}
+
+	#back-btn:hover {
+		background: #fff759;
+	}
+
+	#next-btn:hover {
+		background-color: #7ee583;
+	}
 /*––––––––––––––––––––––*/
 /*        MAP           */
 /*–––––––––-––––––––––––*/
@@ -466,14 +519,15 @@ hr {
 	margin: 5px;
 }
 
-#mapid {width: 500px; height: 500px};
-
-#mapid, #checkboxes {
-	float: left;
+#mapid {
+	min-width: 250px;
+	max-width: 450px;
+	min-height: 350px;
+	max-height: 550px;
 }
 
 input[type="checkbox"]#checkboxes:checked + span {
-      border-color: red;
+    border-color: red;
     background-color:red;
 }
 
@@ -538,5 +592,12 @@ $curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);
 }
 
 .checkbox-display {
-	margin: 2% 0% 2% 0%;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	margin: 0 0 10px 0;
+	font-size: 14pt;
+	padding: 1px 10px;
+	border-radius: 10px;
+	border: 1px;
+	border-style: solid;
 }

@@ -32,7 +32,7 @@
 	<div class="jumbotron jumbotron-fluid animated fadeInDownBig"> 
 	  <div class="container text-center">
 	  	 <!-- page heading -->
-	    <h1 class="display-3" data-toggle="modal" data-target="#event-info">
+	    <h1 class="display-3">
 	    	<span id="bold">Crayon</span>
 	    	<span id="thin">BOX</span>
 	    </h1>
@@ -92,9 +92,9 @@
 		<div class="card-columns mx-auto" id="search-results"></div>
 	</div>
 	
-	<div class="btn-group" role="group" aria-label="Next and Back button">
-	  <button id="back-btn" type="button" class="btn btn-secondary">Back</button>
-	  <button id="next-btn" type="button" class="btn btn-secondary">Next</button>
+	<div class="btn-group justify-content-center" role="group" aria-label="Next and Back button">
+		<a href="#" id="back-btn">&#8249;</a>
+		<a href="#" id="next-btn">&#8250;</a>
 	</div>
 
 </div> <!-- page container --> 
@@ -132,28 +132,22 @@
 
 			<div class="tab-content" id="pills-tabContent">
 			  <div class="tab-pane fade show active" id="pills-event" role="tabpanel" aria-labelledby="pills-event-tab">
-			  	 <span class="event-title">Title...</span>
+			  	 <span id="event-title"></span>
 			  	 <br>
-			  	 <span id="event-cost">Cost...</span>
-			  	 <br>
-			  	 <span id="event-location">Location...</span>
-			  	 <br>
-			  	 <span id="event-weather">Weather...</span>
-			  	 <br>
-			  	 <span id="event-description">Description...</span>
+			  	 <!-- <span id="event-location"></span>
+			  	 <br> -->
+			  	 <span id="event-description"></span>
 			  </div>
+
 			  <div class="tab-pane fade" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
-			  	 <span class="event-title">Title...</span>
-			  	 <br>
-			  	 <span id="restaurant-selector">Restauraunt Selector...</span>
-			   	<br>
-				 <span id="restaurant-list">Restauraunt list...</span>
+				 <!-- Cuisine List  -->
+				 <div id="checkboxes" class="card-columns"></div>
 			  </div>
+
 			  <div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-			  	 <span class="event-title">Title...</span>
-			  	 <br>
-			  	 <span class="event-map">Map...</span>
-			  	 <br>
+			  	 <!-- Map  -->
+			  	 <span id="event-weather">Weather...</span>
+				 <div id="mapid" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
 			  </div>
 			</div>
 
@@ -165,10 +159,6 @@
 </div> <!-- modal -->
 
 
-  <!-- Map Div -->
-	<div id="mapid" class="col-lg-8 col-md-8 col-sm-8 col-xs-8"></div>
-	<!-- Cuisine Div -->
-  <div id="checkboxes" class="col"></div>
 
  <!-- jQuery, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
