@@ -155,14 +155,12 @@ function removeMapMarker(event){
 		for(key in markers[i].cuisine){
 			if($(event).attr("id") === key)
 				markers[i].cuisine[key] = "unchecked";
-				
 		}
 
 		var isChecked = false;
 		for(key in markers[i].cuisine){
 			if(markers[i].cuisine[key] === "checked")
 				isChecked = true;
-				
 		}
 
 		if(!isChecked)
@@ -172,13 +170,12 @@ function removeMapMarker(event){
 
 //determines if it was a checked or uncheck event
 function checkEvent(){
-	if($(this).parent().children(".checkmark__check").attr("d") == ""){
-		addMapMarker(this);
-		$(this).parent().children(".checkmark__check").attr("d", check_d);
+	if($(this).children().children().children(".checkmark__check").attr("d") == ""){
+		addMapMarker($(this).children().children().children(".checkmark__circle"));
+		$(this).children().children().children(".checkmark__check").attr("d", check_d);
 	}
 	else{
-		removeMapMarker(this);
-		$(this).parent().children(".checkmark__check").attr("d", "");
-	}
-		
+		removeMapMarker($(this).children().children().children(".checkmark__circle"));
+		$(this).children().children().children(".checkmark__check").attr("d", "");
+	}	
 }
