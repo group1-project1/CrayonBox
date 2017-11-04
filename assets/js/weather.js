@@ -19,8 +19,9 @@ var getWeather = function(lat, lon, date) {
 		}).done(function(response) {
 				$('#event-weather').html('<img src="https:' + response.current.condition.icon + '"/>');
 				$('#event-weather').css("visibility", "visible")
-		}).fail(function(response){
+		})
+		/*.fail(function(response){
 			console.log(this.url);
-		});
+		});*/
 	// }
 };

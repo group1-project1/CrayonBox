@@ -117,7 +117,7 @@ function generateMarker(restaurants){
 		var colorIndex = findCuisineIndex(restaurant.cuisineType[0]);
 
 		//establish a colorIcon from google's map pin icons that allows for changeable colors/hex code in URL
-		var colorIcon = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + cuisines[colorIndex].cuisineColor + "&chf=a,s,ee00FFFF"
+		var colorIcon = "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + cuisines[colorIndex].cuisineColor + "&chf=a,s,ee00FFFF"
 
 		//set the colored icon
 		var newIcon = L.icon({
