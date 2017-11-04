@@ -1,7 +1,7 @@
 //========================/
 //     Window Reset
 //========================/
-$(window).on('load', function(){
+$(window).ready(function(){
 	// moves user to top of the window
 	window.scrollTo(0,0);
 });
@@ -13,13 +13,10 @@ $(window).on('load', function(){
 var degree = 1800; // default degree (360*5)
 var clicks = 0;
 
-$(document).ready(function(){
-
-	// moves user to top of the window
-	window.scrollTo(0,0);
-
-	// spins wheel on click
-	$('#wheel').click(function(){
+// spins wheel on click
+	var wheelSpin = function(){
+		// moves user to top of the window
+		window.scrollTo(0,0);
 		clicks ++;
 		var newDegree = degree*clicks;
 		var extraDegree = Math.floor(Math.random() * (360 - 1 + 1)) + 1;
@@ -41,9 +38,4 @@ $(document).ready(function(){
 			});
 			noY = t.offset().top;
 		});
-	});
-});// document 
-
-
-
-
+	};
