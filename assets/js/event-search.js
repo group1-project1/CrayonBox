@@ -250,6 +250,7 @@ $(document.body).on("click", ".card", function(event){
     $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
 });
 
+
 //page through results
 function turnPage(direction){
     if(direction === "forward"){
