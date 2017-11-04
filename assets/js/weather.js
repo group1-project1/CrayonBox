@@ -16,15 +16,11 @@ var getWeather = function(lat, lon, date) {
 	  		 // number of days until event, limited to <=10 days in the future
 	  		 days: moment(date).diff(moment(), 'days') 
 		  	}
-
 		}).done(function(response) {
-
-			$('#event-weather').html('<img src="https:' + response.current.condition.icon + '"/>')
-		
+				$('#event-weather').html('<img src="https:' + response.current.condition.icon + '"/>');
+				$('#event-weather').css("visibility", "visible")
 		}).fail(function(response){
-
 			console.log(this.url);
-
 		});
 	// }
 };

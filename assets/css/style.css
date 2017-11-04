@@ -304,9 +304,6 @@ body {
 		}
 		.card-header {
 			background: none;
-			/*height: 73px;*/
-			height: 44px;
-			overflow-y: hidden;
 		}
 			.card-header h4 {
 				margin: -4px 0 0 0;
@@ -468,6 +465,7 @@ body {
 				}
 
 				#event-weather {
+					visibility: hidden;
 					position: absolute;
 					z-index: 999;
 					top: 30px;
@@ -530,7 +528,6 @@ input[type="checkbox"]#checkboxes:checked + span {
     border-color: red;
     background-color:red;
 }
-
 
 
 
