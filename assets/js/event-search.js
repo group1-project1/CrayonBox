@@ -277,8 +277,8 @@ function turnPage(direction){
         if(page > 0){
             page--;
             dealCards(eventList);
-        };
-    };
+        }
+    }
 };
  
 
