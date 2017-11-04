@@ -7,41 +7,60 @@ var eventList = [];
 function validateLocation(){
     var input = $("#search-location").val().trim();
 
+    function green() {
+    	$("#search-type").css("background", "rgba(126, 229, 131, .3)");
+	   $("#search-location").css("background", "rgba(126, 229, 131, .3)");
+    }
+
+    function red() {
+    	$("#search-type").css("background", "white");
+      $("#search-location").css("background", "rgba(255, 147, 147, .5)");
+    }
+
     //checks for starting with a number
     if(input.match(/^[0-9]\d{1}/)){
         //length of 5 of only numbers, call eventSearch
         if(input.match(/^[0-9]\d{4}$/)){
             // API call to search & display events
-            eventSearch(input);
-        }
-        //errors if starts with a number, but not length of 5
-        else{
-            console.log("Zip codes must be a length of 5 and only numbers");
+            green();
+	         eventSearch(input);
+        } else{
+        	   //errors if starts with a number, but not length of 5
+        	   red();
+        	   console.log("Zip codes must be a length of 5 and only numbers");
         }
     }
     //checks for non number for a comma
     else if(input.indexOf(',') != -1){
         //errors if last character is a comma
         if(input[input.length-1] === ','){
+        	   red();
             console.log("last spot is a comma");
-        }
-        else{
+        } else {
             //errors if a digit is found anywhere in the string
-            if(input.match(/\d/))
+            if(input.match(/\d/)) {
+            	 red();
                 console.log("Found a digit");
-            else
+            } else {
                 // API call to search & display events
-                eventSearch(input);
+            green();
+	        	eventSearch(input);
+            }
         }
     }
     //no comma found and doesnt start with a number
     else{
         //errors if a digit is found anywhere in the string
-        if(input.match(/\d/))
+        if(input.match(/\d/)) {
+        	   $("#search-location").css("background", "none");
+        	   $("#search-location").css("background", "rgba(255, 147, 147, .5)");
             console.log("Found a digit");
-        else
+        } else {
             // API call to search & display events
+            $("#search-type").css("background", "rgba(126, 229, 131, .4)");
+	        	$("#search-location").css("background", "rgba(126, 229, 131, .4)");
             eventSearch(input);
+        }
     }
 }
 
