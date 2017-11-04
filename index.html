@@ -37,7 +37,7 @@
 	    	<span id="thin">BOX</span>
 	    </h1>
 	    <p class="lead">The easiest way to find an event and everything about it.</p>
-	    <form class="form-group row justify-content-center">
+	    <form class="form-group row justify-content-center" method="post">
 	    	<!-- search type -->
 	      <div class="input-group col-lg-4 col-md-4 col-10">
 	        <div class="input-group-addon">Find</div>
@@ -46,7 +46,7 @@
 	    	<!-- search location -->
 	      <div class="input-group col-lg-4 col-md-4 col-10">
 	        <div class="input-group-addon">Near</div>
-	        <input type="text" class="form-control" placeholder='"city, state" or zip' id="search-location">
+	        <input type="text" class="form-control" placeholder='"city, state" or zip' id="search-location" data-toggle="popover" data-placement="top" data-content="">
 	      </div>
 	      <!-- date dropdown -->
 	      <div class="input-group col-lg-3 col-md-4  col-10">
@@ -189,6 +189,11 @@
 <script type="text/javascript" src="assets/js/restaurants.js"></script>
 <!-- JS file: Leaflet Map -->
 <script type="text/javascript" src="assets/js/leaflet.js"></script>
+<!--popper-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<!--bootstrap js-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 <!-- JS file: Cuisine Search -->
 <script type="text/javascript">
   $(document.body).on("click", ".checkbox-display", checkEvent);
