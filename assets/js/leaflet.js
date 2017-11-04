@@ -102,9 +102,6 @@ function generateEventMarker(lat, long){
 
 	//display the redIcon with an on-click popup that says EVENT
 	L.marker([lat, long], {icon: redIcon}).addTo(eventMap).bindPopup("<p> EVENT </p>");
-
-
-
 }
 
 //function to generate markers
@@ -203,6 +200,8 @@ function removeMapMarker(event){
 
 //determines if it was a checked or uncheck event
 function checkEvent(){
+  //.checkbox -> div -> svg is the current structure this code follows
+
 	//if the click was on an unchecked cuisine
 	if($(this).children().children().children(".checkmark__check").attr("d") == ""){
 		//add the markers associated with that cuisine type
