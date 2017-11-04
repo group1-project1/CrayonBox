@@ -163,13 +163,11 @@ function setLogoUrl(event, obj){
     } else {
         $.get(obj["logo"]["url"])
         .done(function(){
-            console.log("done");
             $("#" + obj["id"] + "_img").attr("src", obj["logo"]["url"])
             event["logo_url"] = obj["logo"]["url"]
 
         })
         .fail(function(){
-            console.log("fail");
             $("#" + obj["id"] + "_img").attr("src", "assets/media/stock.png")
             event["logo_url"] = "assets/media/stock.png"
         });
