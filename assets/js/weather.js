@@ -1,11 +1,7 @@
 var apiKey = "3197191ce64f4094b7b04205172410";
-var weatherUrl = 'http://api.apixu.com/v1/current.json';
+var weatherUrl = 'https://api.apixu.com/v1/current.json';
 
 var getWeather = function(lat, lon, date) {
-
-	// if ( (moment(date).diff(moment()) <= 10) && (moment(date).diff(moment())<0) ) {
-		//console.log(lat, lon, date)
-
 		$.ajax({
 		  url: weatherUrl,
 		  method: "GET",
@@ -22,5 +18,4 @@ var getWeather = function(lat, lon, date) {
 		}).fail(function(response){
 			console.log(this.url);
 		});
-	// }
 };

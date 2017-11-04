@@ -304,19 +304,8 @@ body {
 		}
 		.card-header {
 			background: none;
+			margin: 0 0 -10px 0;
 		}
-			.card-header h4 {
-				margin: -4px 0 0 0;
-				line-height: 1.4em;
-				font-size: 16pt;
-			}
-			.card-header:hover {
-				height: 100px;
-				overflow: hidden;
-				transition: height .5s;
-				-webkit-transition: height .5s;
-				-webkit-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
-			} 
 		.card-body {
 			min-height: 40px;
 		 	max-height: 160px;
@@ -505,6 +494,8 @@ body {
 	#next-btn:hover {
 		background-color: #7ee583;
 	}
+
+	
 /*––––––––––––––––––––––*/
 /*        MAP           */
 /*–––––––––-––––––––––––*/
