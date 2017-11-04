@@ -33,7 +33,7 @@ function eventSearch(){
 
     //make ajax api call
     $.ajax(query).done(function(response){
-        console.log(response);
+        ///console.log(response);
         parseEvents(response);
         dealCards(eventList, 10)
     });
@@ -54,11 +54,15 @@ function locationSearch(eventObject){
     };
 
     $.ajax(query).done(function(response){
-        console.log("Lat: " + response.latitude);
-        console.log("Long: " + response.longitude);
+        // console.log("Lat: " + response.latitude);
+        // console.log("Long: " + response.longitude);
 
-        //call weather API
-        getWeather(response.latitude, response.longitude, eventObject.date);
+        //call weather API, if event within 10 days from present	
+        if (moment(eventObject.date).diff(moment(), 'days') <= 10) {
+          getWeather(response.latitude, response.longitude, eventObject.date);
+        } else {
+        	  $('#event-weather').css("visibility", "hidden");
+        }
 
         //call restaurant API
         getRestaurants(response.latitude, response.longitude);
@@ -153,8 +157,10 @@ function dealCards(array) {
             '<div id="' + array[i]["id"] + '" class="card animated fadeIn" data-toggle="modal" data-target="#event-info" style="border: 5px outset rgba(' + colorR + ',' + colorG + ',' + colorB + ',.4); background: rgba(' + colorR + ',' + colorG + ',' + colorB + ',.17)">' +
                 '<img class="dollar" src="' + dollarSign + '" alt="' + alt + '"/>' + 
                 '<img id="' + array[i]["id"] + '_img' + '" class="card-img-top mx-auto" src="' + array[i]["logo_url"] + '" alt="Card image cap"/>' +
-            '<div class="card-body" data-spy="scroll">' +
+            '<div class="card-header">' +
             	 '<h5 class="card-title">' + array[i]["name"] + '</h5>' +
+            '</div>' +
+            '<div class="card-body" data-spy="scroll">' +
                 '<p class="card-text">' + array[i]["desc"] + '</p>' +
             '</div>' +
             '<div class="card-footer">' +
@@ -167,13 +173,16 @@ function dealCards(array) {
     //display back-next buttons
     $('.btn-group').css('visibility','visible');
 
+    // listen for event-click and initiate location
     $(".card").on("click", function(event){
     	  //console.log(event);
 
         var eventObject = grabEvent(event.currentTarget.id);
         locationSearch(eventObject);
 
+        // print info on Event Info tab in modal
         $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
+        $('#event-date').html('<p class="card-text">' + moment(array[i]["date"]).local().format("LLLL") + '</p>')
         $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
     });
 }; 
@@ -207,10 +216,12 @@ $(window).ready(function(){
 		  });
     });
 
+    // next button to iterate search results
     $("#next-btn").on("click", function(){
         turnPage("forward");
     });
 
+    // back button to iterate search results
     $("#back-btn").on("click", function(){
         turnPage("back");
     });

@@ -304,9 +304,6 @@ body {
 		}
 		.card-header {
 			background: none;
-			/*height: 73px;*/
-			height: 44px;
-			overflow-y: hidden;
 		}
 			.card-header h4 {
 				margin: -4px 0 0 0;
@@ -468,6 +465,7 @@ body {
 				}
 
 				#event-weather {
+					visibility: hidden;
 					position: absolute;
 					z-index: 999;
 					top: 30px;
@@ -533,7 +531,6 @@ input[type="checkbox"]#checkboxes:checked + span {
 
 
 
-
 @import "color-schemer";
 @import "bourbon";
 
@@ -592,11 +589,7 @@ $curve: cubic-bezier(0.650, 0.000, 0.450, 1.000);
 }
 
 .checkbox-display {
-	/*overflow-x: scroll;*/
-	/*overflow-y: scroll;*/
-	/*margin: 0 0 10px 0;*/
 	font-size: 14pt;
-	/*padding: 1px 2px;*/
 	border-radius: 10px;
 	border: 1px;
 	border-style: solid;
