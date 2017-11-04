@@ -233,14 +233,23 @@ function dealCards(array) {
 
 // listen for event-click and initiate location
 $(document.body).on("click", ".card", function(event){
-    var eventObject = grabEvent(event.currentTarget.id);
-    locationSearch(eventObject);
+      var eventObject = grabEvent(event.currentTarget.id);
+      locationSearch(eventObject);
 
-    // print info on Event Info tab in modal
-    $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
-    $('#event-date').html('<p class="card-text">' + moment(eventObject["date"]).local().format("LLLL") + '</p>')
-    $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
-});
+      // resets modal to have event info default
+      $('#pills-map-tab').removeClass('active');
+      $('#pills-map').removeClass('fade show active');
+      $('#pills-restaurant-tab').removeClass('active');
+      $('#pills-restaurant').removeClass('fade show active');
+      $('#pills-event-tab').addClass('active');
+      $('#pills-event').addClass('fade show active');
+
+      // print info on Event Info tab in modal
+      $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
+      $('#event-date').html('<p class="card-text">' + moment(eventObject["date"]).local().format("LLLL") + '</p>')
+      $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
+    });
+};
 
 //page through results
 function turnPage(direction){
