@@ -264,8 +264,7 @@ $(document.body).on("click", ".card", function(event){
       $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
       $('#event-date').html('<p class="card-text">' + moment(eventObject["date"]).local().format("LLLL") + '</p>')
       $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
-    });
-};
+});
 
 //page through results
 function turnPage(direction){
