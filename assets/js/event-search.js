@@ -8,13 +8,15 @@ function validateLocation(){
     var input = $("#search-location").val().trim();
 
     function green() {
-    	$("#search-type").css("background", "rgba(126, 229, 131, .3)");
-	   $("#search-location").css("background", "rgba(126, 229, 131, .3)");
+    	$("#search-type").css("background", "rgba(126, 229, 131, .2)");
+	   $("#search-location").css("background", "rgba(126, 229, 131, .2)");
+	   $("#search-date").css("background", "rgba(126, 229, 131, .2)");
     }
 
     function red() {
     	$("#search-type").css("background", "white");
       $("#search-location").css("background", "rgba(255, 147, 147, .5)");
+      $("#search-date").css("background", "white");
     }
 
     //checks for starting with a number
@@ -23,6 +25,7 @@ function validateLocation(){
         if(input.match(/^[0-9]\d{4}$/)){
             // API call to search & display events
             green();
+            wheelSpin();
 	         eventSearch(input);
         } else{
         	   //errors if starts with a number, but not length of 5
@@ -44,6 +47,7 @@ function validateLocation(){
             } else {
                 // API call to search & display events
             green();
+            wheelSpin();
 	        	eventSearch(input);
             }
         }
@@ -52,13 +56,12 @@ function validateLocation(){
     else{
         //errors if a digit is found anywhere in the string
         if(input.match(/\d/)) {
-        	   $("#search-location").css("background", "none");
-        	   $("#search-location").css("background", "rgba(255, 147, 147, .5)");
+        	   red();
             console.log("Found a digit");
         } else {
             // API call to search & display events
-            $("#search-type").css("background", "rgba(126, 229, 131, .4)");
-	        	$("#search-location").css("background", "rgba(126, 229, 131, .4)");
+            green();
+            wheelSpin();
             eventSearch(input);
         }
     }
