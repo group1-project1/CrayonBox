@@ -3,15 +3,56 @@ var page = 0;
 
 var eventList = [];
 
+//function to check the input of the user
+function validateLocation(){
+    var input = $("#search-location").val().trim();
 
-function eventSearch(){
+    //checks for starting with a number
+    if(input.match(/^[0-9]\d{1}/)){
+        //length of 5 of only numbers, call eventSearch
+        if(input.match(/^[0-9]\d{4}$/)){
+            // API call to search & display events
+            eventSearch(input);
+        }
+        //errors if starts with a number, but not length of 5
+        else{
+            console.log("Zip codes must be a length of 5 and only numbers");
+        }
+    }
+    //checks for non number for a comma
+    else if(input.indexOf(',') != -1){
+        //errors if last character is a comma
+        if(input[input.length-1] === ','){
+            console.log("last spot is a comma");
+        }
+        else{
+            //errors if a digit is found anywhere in the string
+            if(input.match(/\d/))
+                console.log("Found a digit");
+            else
+                // API call to search & display events
+                eventSearch(input);
+        }
+    }
+    //no comma found and doesnt start with a number
+    else{
+        //errors if a digit is found anywhere in the string
+        if(input.match(/\d/))
+            console.log("Found a digit");
+        else
+            // API call to search & display events
+            eventSearch(input);
+    }
+}
+
+function eventSearch(input){
     var TOKEN = "5HWZ7K734R7NM7GSELOG";
     var URL = "https://www.eventbriteapi.com/v3/events/search/";
 
     //create parameter object
     var parameters = {
         'q': $("#search-type").val().trim(),
-        'location.address': $("#search-location").val().trim(),
+        'location.address': input,
         'start_date.keyword': setDate($("#search-date").val().trim())
     };
 
@@ -33,7 +74,6 @@ function eventSearch(){
 
     //make ajax api call
     $.ajax(query).done(function(response){
-        console.log(response);
         parseEvents(response);
         dealCards(eventList, 10)
     });
@@ -54,9 +94,6 @@ function locationSearch(eventObject){
     };
 
     $.ajax(query).done(function(response){
-        console.log("Lat: " + response.latitude);
-        console.log("Long: " + response.longitude);
-
         //call weather API
         getWeather(response.latitude, response.longitude, eventObject.date);
 
@@ -184,8 +221,8 @@ $(window).ready(function(){
     $("#wheel").on("click", function(event){
         event.preventDefault();
 
-        // API call to search & display events
-        eventSearch(); 
+        //calls the validation function
+        validateLocation();
 			
 			// animates Jumbotron on wheel click
 		  $('.display-3').addClass('animated bounce').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){

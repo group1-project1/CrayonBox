@@ -82,9 +82,6 @@ function generateEventMarker(lat, long){
 	});
 
 	L.marker([lat, long], {icon: redIcon}).addTo(eventMap).bindPopup("<p> EVENT </p>");
-
-
-
 }
 
 //function to generate markers
@@ -170,6 +167,7 @@ function removeMapMarker(event){
 
 //determines if it was a checked or uncheck event
 function checkEvent(){
+	//.checkbox -> div -> svg is the current structure this code follows
 	if($(this).children().children().children(".checkmark__check").attr("d") == ""){
 		addMapMarker($(this).children().children().children(".checkmark__circle"));
 		$(this).children().children().children(".checkmark__check").attr("d", check_d);
