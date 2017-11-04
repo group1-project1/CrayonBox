@@ -7,64 +7,80 @@ var eventList = [];
 function validateLocation(){
     var input = $("#search-location").val().trim();
 
+    //removes and clears the data content of the popover
+    $("#search-location").popover("dispose");
+    $("#search-location").attr("data-content", "");
+
     function green() {
-    	$("#search-type").css("background", "rgba(126, 229, 131, .2)");
+       $("#search-type").css("background", "rgba(126, 229, 131, .2)");
 	   $("#search-location").css("background", "rgba(126, 229, 131, .2)");
 	   $("#search-date").css("background", "rgba(126, 229, 131, .2)");
     }
 
     function red() {
-    	$("#search-type").css("background", "white");
-      $("#search-location").css("background", "rgba(255, 147, 147, .5)");
-      $("#search-date").css("background", "white");
+        $("#search-type").css("background", "white");
+        $("#search-location").css("background", "rgba(255, 147, 147, .5)");
+        $("#search-date").css("background", "white");
     }
 
-    //checks for starting with a number
-    if(input.match(/^[0-9]\d{1}/)){
-        //length of 5 of only numbers, call eventSearch
-        if(input.match(/^[0-9]\d{4}$/)){
-            // API call to search & display events
-            green();
-            wheelSpin();
-	         eventSearch(input);
-        } else{
-        	   //errors if starts with a number, but not length of 5
-        	   red();
-        	   console.log("Zip codes must be a length of 5 and only numbers");
-        }
+    //checks if the field was blank
+    if(input == null || input === ""){
+        red();
+        $("#search-location").attr("data-content", 'Please enter a "city, state" or a zip code.');
+        $("#search-location").popover("toggle");
     }
-    //checks for non number for a comma
-    else if(input.indexOf(',') != -1){
-        //errors if last character is a comma
-        if(input[input.length-1] === ','){
-        	   red();
-            console.log("last spot is a comma");
-        } else {
-            //errors if a digit is found anywhere in the string
-            if(input.match(/\d/)) {
-            	 red();
-                console.log("Found a digit");
-            } else {
+    else {
+        //checks for starting with a number
+        if(input.match(/^[0-9]\d{1}/)){
+            //length of 5 of only numbers, call eventSearch
+            if(input.match(/^[0-9]\d{4}$/)){
                 // API call to search & display events
-            green();
-            wheelSpin();
-	        	eventSearch(input);
+                green();
+                wheelSpin();
+                eventSearch(input);
+            } else{
+            	   //errors if starts with a number, but not length of 5
+            	   red();
+                   $("#search-location").attr("data-content", 'Zip codes must be a length of 5 and only numbers.');
+                   $("#search-location").popover("toggle");
             }
         }
-    }
-    //no comma found and doesnt start with a number
-    else{
-        //errors if a digit is found anywhere in the string
-        if(input.match(/\d/)) {
-        	   red();
-            console.log("Found a digit");
-        } else {
-            // API call to search & display events
-            green();
-            wheelSpin();
-            eventSearch(input);
+        //checks for non number for a comma
+        else if(input.indexOf(',') != -1){
+            //errors if last character is a comma
+            if(input[input.length-1] === ','){
+            	red();
+                $("#search-location").attr("data-content", 'Last character is a comma.');
+                $("#search-location").popover("toggle");
+            } else {
+                //errors if a digit is found anywhere in the string
+                if(input.match(/\d/)) {
+                	red();
+                    $("#search-location").attr("data-content", 'Found a digit in a "city, state" input.');
+                    $("#search-location").popover("toggle");
+                } else {
+                    // API call to search & display events
+                    green();
+                    wheelSpin();
+    	        	eventSearch(input);
+                }
+            }
         }
-    }
+        //no comma found and doesnt start with a number
+        else{
+            //errors if a digit is found anywhere in the string
+            if(input.match(/\d/)) {
+            	   red();
+                $("#search-location").attr("data-content", 'Found a digit in a "city, state" input.');
+                $("#search-location").popover("toggle");
+            } else {
+                // API call to search & display events
+                green();
+                wheelSpin();
+                eventSearch(input);
+            }
+        }
+    } //end checks for empty input
 }
 
 function eventSearch(input){
@@ -269,7 +285,7 @@ function turnPage(direction){
 
 $(window).ready(function(){
     $("#wheel").on("click", function(event){
-        event.preventDefault();
+        //event.preventDefault();
 
         //calls the validation function
         validateLocation();
