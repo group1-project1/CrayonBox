@@ -237,6 +237,14 @@ function dealCards(array) {
         var eventObject = grabEvent(event.currentTarget.id);
         locationSearch(eventObject);
 
+        // resets modal to have event info default
+        $('#pills-map-tab').removeClass('active');
+        $('#pills-map').removeClass('fade show active');
+        $('#pills-restaurant-tab').removeClass('active');
+        $('#pills-restaurant').removeClass('fade show active');
+        $('#pills-event-tab').addClass('active');
+        $('#pills-event').addClass('fade show active');
+
         // print info on Event Info tab in modal
         $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
         $('#event-date').html('<p class="card-text">' + moment(array[i]["date"]).local().format("LLLL") + '</p>')
