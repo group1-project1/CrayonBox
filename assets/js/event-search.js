@@ -229,28 +229,26 @@ function dealCards(array) {
 
     //display back-next buttons
     $('.btn-group').css('visibility','visible');
-
-    // listen for event-click and initiate location
-    $(".card").on("click", function(event){
-    	  //console.log(event);
-
-        var eventObject = grabEvent(event.currentTarget.id);
-        locationSearch(eventObject);
-
-        // resets modal to have event info default
-        $('#pills-map-tab').removeClass('active');
-        $('#pills-map').removeClass('fade show active');
-        $('#pills-restaurant-tab').removeClass('active');
-        $('#pills-restaurant').removeClass('fade show active');
-        $('#pills-event-tab').addClass('active');
-        $('#pills-event').addClass('fade show active');
-
-        // print info on Event Info tab in modal
-        $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
-        $('#event-date').html('<p class="card-text">' + moment(array[i]["date"]).local().format("LLLL") + '</p>')
-        $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
-    });
 }; 
+
+// listen for event-click and initiate location
+$(document.body).on("click", ".card", function(event){
+    var eventObject = grabEvent(event.currentTarget.id);
+    locationSearch(eventObject);
+
+	  // resets modal to have event info default
+	  $('#pills-map-tab').removeClass('active');
+	  $('#pills-map').removeClass('fade show active');
+	  $('#pills-restaurant-tab').removeClass('active');
+	  $('#pills-restaurant').removeClass('fade show active');
+	  $('#pills-event-tab').addClass('active');
+	  $('#pills-event').addClass('fade show active');
+
+    // print info on Event Info tab in modal
+    $('#event-title').html('<h4>' + eventObject["name"] + '</h4>');
+    $('#event-date').html('<p class="card-text">' + moment(eventObject["date"]).local().format("LLLL") + '</p>')
+    $('#event-description').html('<p>' + eventObject["desc"] + '</p>');
+});
 
 //page through results
 function turnPage(direction){
